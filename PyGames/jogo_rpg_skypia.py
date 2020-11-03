@@ -39,10 +39,22 @@ if ProtaTempClass == '3':
     Prota['Classe'] = 'Arcanne'
 
 
-def Battle(Prota, Inimigo):
+def BattleServantOne(Prota, Inimigo):
     for c in range(0, 1):
          Inimigo['PowerInimigoHeal'] -= Prota['PowerServantAtq']
-    print(f'Você Deu {Prota["PowerServantAtq"]} De ATQ no FairyGil(Inimigo1) que Agora está com {Inimigo["PowerInimigoHeal"]} de Vida')
+    print(f'Você Deu {Prota["PowerServantAtq"]} De ATQ no FairGil(Inimigo1) que Agora está com {Inimigo["PowerInimigoHeal"]} de Vida')
+
+
+def BattleLogiaOne(Prota, Inimigo):
+    for c in range(0,1):
+        Inimigo['PowerInimigoHeal'] -= Prota['PowerLogiaAtq']
+    print(f'Você deu {Prota["PowerLogiaAtq"]} De ATQ no FairGil que Agora está com {Inimigo["PowerInimigoHeal"]} de Vida')
+
+
+def BattleArcanneOne(Prota, Inimigo):
+    for c in range(0,1):
+        Inimigo['PowerInimigoHeal'] -= Prota['PowerArcanneAtq']
+    print(f'Você deu {Prota["PowerArcanneAtq"]} De ATQ no FairGil que Agora está com {Inimigo["PowerInimigoHeal"]} de Vida')
 
 
 Action = input(str('Agora que Você Criou seu Personagem Pode Fazer Algumas Açoes:\n'
@@ -54,4 +66,9 @@ if Action == 'Battle':
     TempInimigo = input(str('Escolha algum Inimigo:'
                             'Digite 1 Para>> Inimigo Mais Fraco'))
     if TempInimigo == '1':
-        Battle(PowerServant, PowerFirstInimigo)
+        if Prota['Classe'] == 'Servant':
+            BattleServantOne(PowerServant, PowerFirstInimigo)
+        if Prota['Classe'] == 'Logia':
+            BattleLogiaOne(PowerLogia, PowerFirstInimigo)
+        if Prota['Classe'] == 'Arcanne':
+            BattleArcanneOne(PowerArcanne, PowerFirstInimigo)
