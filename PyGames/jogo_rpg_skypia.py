@@ -33,20 +33,26 @@ PowerSecondInimigo = {
 
 print('Bem Vindo ao Jogo de RPG Skypia')
 PrimeiroInimigo = {'Nome':'FairGil', 'Classe':'Inimigo1'}
-Protagonista = {'Nome':' ','Classe':''}
+Protagonista = {'Nome':' ','Classe':'','Xp': 0}
 Protagonista['Nome'] = input(str('Digite Seu Nome:'))
 sleep(1)
 print('Escolha uma classe:\n'
       'Digite 1 para>> Servant: Você será como um Summoner, Invocara um Servo para que lute por você\n'
       'Digite 2 para>> Logia: Você será o seu próprio poder, Se tornará o Proprio Poder\n'
       'Digite 3 Para>> Arcanne: Você Será Como um Encantador, Poderá se Tornar um Servo')
-ProtaTempClass = input(str('Escolha uma Classe: '))
+while True:
+    ProtaTempClass = input(str('Escolha uma Classe: '))
+    if ProtaTempClass not in '123':
+        continue
+    else:
+        break
 if ProtaTempClass == '1':
     Protagonista['Classe'] = 'Servant'
 if ProtaTempClass == '2':
     Protagonista['Classe'] = 'Logia'
 if ProtaTempClass == '3':
     Protagonista['Classe'] = 'Arcanne'
+
 
 
 def Battle(Prota, Inimigo,):
@@ -62,7 +68,9 @@ def Battle(Prota, Inimigo,):
                 print(f'{Protagonista["Nome"]} Deu {Prota["PowerProtaAtq"]}'
                       f' de Dano no {Inimigo["InimigoName"]} que Agora Está com {TempInimigoHeal} de Vida')
                 if TempInimigoHeal <= 0:
-                    return print(f'Parabéns Você ({Protagonista["Nome"]}) Ganhou, A batalha durou {RoundCont} Rodadas ')
+                    Protagonista['Xp'] += 1
+                    print(f'Parabéns Você ({Protagonista["Nome"]}) Ganhou, A batalha durou {RoundCont} Rodadas ')
+                    break
                 input('Press Enter to Continue')
                 sleep(1)
 
@@ -72,36 +80,47 @@ def Battle(Prota, Inimigo,):
                       f' de Dano no {Protagonista["Nome"]} que Agora Está com {TempProtaHeal} de Vida')
                 RoundCont += 1
                 if TempProtaHeal <= 0:
-                    return print(f'Você perdeu, A Batalha durou {RoundCont} Rodadas')
+                    print(f'Você perdeu, A Batalha durou {RoundCont} Rodadas')
+                    break
                 input('Press Enter to Continue')
                 sleep(1)
-            if TempInimigoHeal == 0:
-                print(f'Parabéns Você ({Protagonista["Nome"]}) Ganhou, A batalha durou {RoundCont} ')
-            else:
-                print('Você perdeu')
+            MenuGame()
 
 
 
-Action = input(str('Agora que Você Criou seu Personagem Pode Fazer Algumas Açoes:\n'
-        'Digite Pro Para>> Visualizar o Próprio Perfil\n'
-        'Digite Battle Para>> Lutar com algum Inimigo ')).capitalize()
-if Action == 'Pro':
-    print(Protagonista)
-if Action == 'Battle':
-    TempInimigo = input(str('Escolha algum Inimigo:\n'
+def MenuGame():
+    while True:
+        Action = input(str('Agora Você Está no Menu do Jogo, Você Consegue Fazer Algumas Açoes:\n'
+            'Digite Pro Para>> Visualizar o Próprio Perfil\n'
+            'Digite Battle Para>> Lutar com algum Inimigo\n'
+            'Digite Uplvl Para>> Para Atualizar seu Nivel (Level Cap 2) ')).capitalize()
+        if Action not in "ProBattleUplvl":
+            continue
+        if Action == 'Uplvl':
+            #Completar Lvl Up
+            print('Essa Função Ainda não está completa')
+            MenuGame()
+        if Action == 'Pro':
+            print(Protagonista)
+            MenuGame()
+        if Action == 'Battle':
+            TempInimigo = input(str('Escolha algum Inimigo:\n'
                             'Digite 1 Para>> Inimigo Fraco\n'
                             'Digite 2 Para>> Inimigo Medio'))
-    if TempInimigo == '1':
-        if Protagonista['Classe'] == 'Servant':
-            Battle(PowerServant, PowerFirstInimigo)
-        if Protagonista['Classe'] == 'Logia':
-            Battle(PowerLogia, PowerFirstInimigo)
-        if Protagonista['Classe'] == 'Arcanne':
-            Battle(PowerArcanne, PowerFirstInimigo)
-    if TempInimigo == '2':
-        if Protagonista['Classe'] == 'Servant':
-            Battle(PowerServant, PowerSecondInimigo)
-        if Protagonista['Classe'] == 'Logia':
-            Battle(PowerLogia, PowerSecondInimigo)
-        if Protagonista['Classe'] == 'Arcanne':
-            Battle(PowerArcanne, PowerSecondInimigo)
+            if TempInimigo == '1':
+                if Protagonista['Classe'] == 'Servant':
+                    Battle(PowerServant, PowerFirstInimigo)
+                if Protagonista['Classe'] == 'Logia':
+                    Battle(PowerLogia, PowerFirstInimigo)
+                if Protagonista['Classe'] == 'Arcanne':
+                    Battle(PowerArcanne, PowerFirstInimigo)
+        if TempInimigo == '2':
+            if Protagonista['Classe'] == 'Servant':
+                Battle(PowerServant, PowerSecondInimigo)
+            if Protagonista['Classe'] == 'Logia':
+                Battle(PowerLogia, PowerSecondInimigo)
+            if Protagonista['Classe'] == 'Arcanne':
+                Battle(PowerArcanne, PowerSecondInimigo)
+
+
+MenuGame()
