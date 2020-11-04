@@ -114,13 +114,13 @@ def MenuGame():
                     Battle(PowerLogia, PowerFirstInimigo)
                 if Protagonista['Classe'] == 'Arcanne':
                     Battle(PowerArcanne, PowerFirstInimigo)
-        if TempInimigo == '2':
-            if Protagonista['Classe'] == 'Servant':
-                Battle(PowerServant, PowerSecondInimigo)
-            if Protagonista['Classe'] == 'Logia':
-                Battle(PowerLogia, PowerSecondInimigo)
-            if Protagonista['Classe'] == 'Arcanne':
-                Battle(PowerArcanne, PowerSecondInimigo)
+            if TempInimigo == '2':
+                if Protagonista['Classe'] == 'Servant':
+                    Battle(PowerServant, PowerSecondInimigo)
+                if Protagonista['Classe'] == 'Logia':
+                    Battle(PowerLogia, PowerSecondInimigo)
+                if Protagonista['Classe'] == 'Arcanne':
+                    Battle(PowerArcanne, PowerSecondInimigo)
 
 
 MenuGame()
